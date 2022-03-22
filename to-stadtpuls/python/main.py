@@ -1,13 +1,17 @@
 import requests
 import sys
-from dotenv import dotenv_values
+import os
+# from dotenv import dotenv_values
+from dotenv import load_dotenv
 from twisted.internet import task, reactor
-
-config = dotenv_values(".env")
+load_dotenv()
+# config = dotenv_values(".env")
 INTERVAL = 60 * 3
 SENSEBOX_ID = "5e9af8d545f937001ce58076"
 STADTPULS_SENSOR_ID = 79
-STADTPULS_TOKEN = config["STADTPULS_TOKEN"]
+# STADTPULS_TOKEN = config["STADTPULS_TOKEN"]
+STADTPULS_TOKEN = os.getenv("STADTPULS_TOKEN")
+print(STADTPULS_TOKEN)
 
 SENSOR_URL = "https://api.stadtpuls.com/api/v3/sensors/{}/records".format(
     STADTPULS_SENSOR_ID)
