@@ -1,7 +1,10 @@
 import requests
+import sys
 from dotenv import dotenv_values
-config = dotenv_values(".env")
+from twisted.internet import task, reactor
 
+config = dotenv_values(".env")
+INTERVAL = 60 * 3
 SENSEBOX_ID = "5e9af8d545f937001ce58076"
 STADTPULS_SENSOR_ID = 79
 STADTPULS_TOKEN = config["STADTPULS_TOKEN"]
@@ -15,7 +18,7 @@ def get_sensor_data(item):
     return float(item['lastMeasurement']['value'])
 
 
-def main():
+def collect():
     """DOC string"""
     try:
         osm_response = requests.get(
@@ -41,6 +44,16 @@ def main():
 
     except requests.exceptions.RequestException as error:
         print(error)
+    print("Next execution in {} seconds".format(INTERVAL))
+
+
+def main():
+    try:
+        schedule = task.LoopingCall(collect)
+        schedule.start(INTERVAL, now=True)
+        reactor.run()
+    except KeyboardInterrupt:
+        sys.exit(0)
 
 
 main()
