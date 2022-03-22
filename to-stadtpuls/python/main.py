@@ -11,7 +11,7 @@ SENSEBOX_ID = "5e9af8d545f937001ce58076"
 STADTPULS_SENSOR_ID = 79
 # STADTPULS_TOKEN = config["STADTPULS_TOKEN"]
 STADTPULS_TOKEN = os.getenv("STADTPULS_TOKEN")
-print(STADTPULS_TOKEN)
+# print(STADTPULS_TOKEN)
 
 SENSOR_URL = "https://api.stadtpuls.com/api/v3/sensors/{}/records".format(
     STADTPULS_SENSOR_ID)
