@@ -6,7 +6,7 @@ constantly==15.1.0
 hyperlink==21.0.0
 idna==3.3
 incremental==21.3.0
-python-dotenv==0.19.2
+python-dotenv==0.21.0
 requests==2.27.1
 six==1.16.0
 Twisted==22.2.0
